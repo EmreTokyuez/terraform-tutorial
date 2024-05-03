@@ -8,14 +8,24 @@ terraform {
   }
 
   required_version = ">= 1.1.0"
+  cloud {
+    organization = "tutorial-emretok"
+    workspaces {
+      name = "learn-terraform-azure"
+    }
+  }
 }
+
+
 
 provider "azurerm" {
   features {}
 }
 
+
+
 resource "azurerm_resource_group" "rg" {
-  name     = "myTFResourceGroup"
+  name     = var.resource_group_name
   location = "westus2"
    tags = {
     Environment = "Terraform Getting Started"
